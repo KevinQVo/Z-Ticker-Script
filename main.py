@@ -18,4 +18,4 @@ if user_input:
     if cleaned:
         output_string = ' '.join(cleaned)
         st.subheader("Cleaned Output:")
-        st.text_input("Click the copy icon on the right", value=output_string, label_visibility="collapsed")
+        st.code(output_string)  # This has the built-in copy icon
