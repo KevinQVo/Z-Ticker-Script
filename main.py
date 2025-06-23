@@ -8,20 +8,16 @@ user_input = st.text_area("Enter ztickers (one per line):", height=200)
 if user_input:
     lines = user_input.strip().split('\n')
 
-    numbers = []
+    cleaned = []
     for line in lines:
         line = line.strip()
-        if line.startswith('z') and len(line) > 1:
-            number = line[1:]
-            if number.isdigit():
-                numbers.append(number)
-            else:
-                st.warning(f"'{line}' is not valid (non-numeric after 'z')")
+        if len(line) > 1:
+            cleaned.append(line[1:])  # Remove only the first character
         else:
-            st.warning(f"'{line}' is not a valid zticker")
+            st.warning(f"'{line}' is too short to clean")
 
-    if numbers:
-        output_string = ' '.join(numbers)
+    if cleaned:
+        output_string = ' '.join(cleaned)
         st.subheader("Cleaned Output:")
         st.code(output_string)
         st.text_input("Click the copy icon on the right:", value=output_string, label_visibility="collapsed")
