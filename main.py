@@ -18,10 +18,4 @@ if user_input:
     if cleaned:
         output_string = ' '.join(cleaned)
         st.subheader("Cleaned Output:")
-        st.code(output_string)
-
-        # Hidden input field for JS to access
-        st.markdown(f"""
-        <input type="text" value="{output_string}" id="copyTarget" style="position: absolute; left: -9999px;">
-        <button onclick="navigator.clipboard.writeText(document.getElementById('copyTarget').value)">📋 Copy to Clipboard</button>
-        """, unsafe_allow_html=True)
+        st.text_input("Click the copy icon on the right", value=output_string, label_visibility="collapsed")
