@@ -2,7 +2,7 @@ import streamlit as st
 
 st.title("Z-Ticker Cleaner")
 
-user_input = st.text_area("Enter ztickers (one per line):", height=200)
+user_input = st.text_area("Enter z- tickers:", height=200)
 
 if user_input:
     lines = user_input.strip().split('\n')
@@ -19,6 +19,6 @@ if user_input:
     if cleaned:
         output_string = ' '.join(cleaned)
 
-        st.subheader("Cleaned Output:")
+        st.subheader("Output:")
         st.code(output_string)
         st.info(f" Total Entries: {total_entries} | Total Outputs: {len(cleaned)}")
