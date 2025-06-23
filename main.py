@@ -22,4 +22,4 @@ if user_input:
         st.subheader("Output:")
         st.code(output_string)
         st.info(f" Total Entries: {total_entries} | Total Outputs: {len(cleaned)}")
-    st.markdown("**Author: Kevin Vo**")
+st.markdown("**Author: Kevin Vo**")
