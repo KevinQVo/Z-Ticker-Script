@@ -2,33 +2,21 @@ import streamlit as st
 
 st.title("Zticker Cleaner")
 
+# Input field for ztickers
 user_input = st.text_area("Enter ztickers (one per line):", height=200)
 
 if user_input:
     lines = user_input.strip().split('\n')
-    numbers = []
 
+    cleaned = []
     for line in lines:
         line = line.strip()
-        if line.startswith('z') and len(line) > 1:
-            number = line[1:]
-            if number.isdigit():
-                numbers.append(number)
-            else:
-                st.warning(f"'{line}' is not valid (non-numeric after 'z')")
+        if len(line) > 1:
+            cleaned.append(line[1:])  # Remove only the first character
         else:
-            st.warning(f"'{line}' is not a valid zticker")
+            st.warning(f"'{line}' is too short to clean")
 
-    if numbers:
-        output_string = ' '.join(numbers)
-
-        st.subheader("Cleaned Output:")
-
-        # Create two columns: one for display, one for copy
-        col1, col2 = st.columns([3, 2])
-
-        with col1:
-            st.code(output_string)
-
-        with col2:
-            st.text_input("Copy", value=output_string, label_visibility="collapsed")
+    if cleaned:
+        output_string = ' '.join(cleaned)
+        st.subheader("Cleaned Output (click to copy):")
+        st.text_input("Cleaned Output", value=output_string, label_visibility="collapsed")
