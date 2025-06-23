@@ -2,7 +2,6 @@ import streamlit as st
 
 st.title("Zticker Cleaner")
 
-# Input field for ztickers
 user_input = st.text_area("Enter ztickers (one per line):", height=200)
 
 if user_input:
@@ -12,11 +11,17 @@ if user_input:
     for line in lines:
         line = line.strip()
         if len(line) > 1:
-            cleaned.append(line[1:])  # Remove only the first character
+            cleaned.append(line[1:])
         else:
             st.warning(f"'{line}' is too short to clean")
 
     if cleaned:
         output_string = ' '.join(cleaned)
-        st.subheader("Cleaned Output (click to copy):")
-        st.text_input("Cleaned Output", value=output_string, label_visibility="collapsed")
+        st.subheader("Cleaned Output:")
+        st.code(output_string)
+
+        # Hidden input field for JS to access
+        st.markdown(f"""
+        <input type="text" value="{output_string}" id="copyTarget" style="position: absolute; left: -9999px;">
+        <button onclick="navigator.clipboard.writeText(document.getElementById('copyTarget').value)">📋 Copy to Clipboard</button>
+        """, unsafe_allow_html=True)
